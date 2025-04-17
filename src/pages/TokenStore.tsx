@@ -1,4 +1,3 @@
-
 import { TokenPackage } from "@/components/TokenPackage";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Coins, CreditCard, Gift } from "lucide-react";
@@ -12,7 +11,7 @@ export default function TokenStore() {
       price: 4.99,
       bonus: 1000,
       popular: false,
-      color: "purple",
+      color: "purple" as const,
     },
     {
       id: 2,
@@ -21,7 +20,7 @@ export default function TokenStore() {
       price: 19.99,
       bonus: 7500, // 15% bonus
       popular: true,
-      color: "blue",
+      color: "blue" as const,
     },
     {
       id: 3,
@@ -30,7 +29,7 @@ export default function TokenStore() {
       price: 49.99,
       bonus: 22500, // 15% bonus
       popular: false,
-      color: "green",
+      color: "green" as const,
     },
     {
       id: 4,
@@ -39,7 +38,7 @@ export default function TokenStore() {
       price: 99.99,
       bonus: 100000, // 20% bonus
       popular: false,
-      color: "gold",
+      color: "gold" as const,
     },
   ];
 
@@ -50,8 +49,8 @@ export default function TokenStore() {
       tokens: 5000,
       dailyBonus: 1000,
       price: 9.99,
-      period: "weekly",
-      color: "purple",
+      period: "weekly" as const,
+      color: "purple" as const,
     },
     {
       id: 6,
@@ -59,9 +58,9 @@ export default function TokenStore() {
       tokens: 50000,
       dailyBonus: 3000,
       price: 29.99,
-      period: "monthly",
+      period: "monthly" as const,
       popular: true,
-      color: "gold",
+      color: "gold" as const,
     },
   ];
 
