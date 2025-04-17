@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,43 +53,25 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-                // Custom auto colors
-                auto: {
-                    blue: {
-                        50: '#EBF2FF',
-                        100: '#D6E4FF',
-                        200: '#ADC8FF',
-                        300: '#85ADFF',
-                        400: '#5C91FF',
-                        500: '#3366FF',
-                        600: '#1E3A8A', // Primary
-                        700: '#1E3A70',
-                        800: '#15295B',
-                        900: '#0C1733',
+                // Custom casino colors
+                casino: {
+                    dark: {
+                        900: '#0F0F19',
+                        800: '#121224', 
+                        700: '#1A1A2E',
+                        600: '#252547',
                     },
-                    red: {
-                        50: '#FEF2F2',
-                        100: '#FEE2E2',
-                        200: '#FECACA',
-                        300: '#FCA5A5',
-                        400: '#F87171',
-                        500: '#EF4444',
-                        600: '#DC2626', // Accent
-                        700: '#B91C1C',
-                        800: '#991B1B',
-                        900: '#7F1D1D',
+                    purple: {
+                        900: '#3A1464',
+                        800: '#4A1A80',
+                        700: '#5B2099',
+                        600: '#6C27B3',
+                        500: '#7E2ED0',
                     },
-                    gray: {
-                        50: '#F8FAFC',
-                        100: '#F1F5F9',
-                        200: '#E2E8F0',
-                        300: '#CBD5E1',
-                        400: '#94A3B8', // Secondary
-                        500: '#64748B',
-                        600: '#475569',
-                        700: '#334155',
-                        800: '#1E293B',
-                        900: '#0F172A',
+                    gold: {
+                        500: '#F4BD47',
+                        400: '#F8CA69',
+                        300: '#FAD88B',
                     },
                 },
 				sidebar: {
@@ -123,11 +106,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-glow': {
+					'0%, 100%': { opacity: '1', transform: 'scale(1)' },
+					'50%': { opacity: '0.7', transform: 'scale(1.05)' },
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
+				'spin-slow': {
+					'from': { transform: 'rotate(0deg)' },
+					'to': { transform: 'rotate(360deg)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite',
+				'spin-slow': 'spin-slow 10s linear infinite',
 			}
 		}
 	},
