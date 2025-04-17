@@ -52,6 +52,45 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+                // Custom auto colors
+                auto: {
+                    blue: {
+                        50: '#EBF2FF',
+                        100: '#D6E4FF',
+                        200: '#ADC8FF',
+                        300: '#85ADFF',
+                        400: '#5C91FF',
+                        500: '#3366FF',
+                        600: '#1E3A8A', // Primary
+                        700: '#1E3A70',
+                        800: '#15295B',
+                        900: '#0C1733',
+                    },
+                    red: {
+                        50: '#FEF2F2',
+                        100: '#FEE2E2',
+                        200: '#FECACA',
+                        300: '#FCA5A5',
+                        400: '#F87171',
+                        500: '#EF4444',
+                        600: '#DC2626', // Accent
+                        700: '#B91C1C',
+                        800: '#991B1B',
+                        900: '#7F1D1D',
+                    },
+                    gray: {
+                        50: '#F8FAFC',
+                        100: '#F1F5F9',
+                        200: '#E2E8F0',
+                        300: '#CBD5E1',
+                        400: '#94A3B8', // Secondary
+                        500: '#64748B',
+                        600: '#475569',
+                        700: '#334155',
+                        800: '#1E293B',
+                        900: '#0F172A',
+                    },
+                },
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
