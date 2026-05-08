@@ -3,11 +3,13 @@ import { ProgressBar } from '@/components/ProgressBar';
 import { XPBadge } from '@/components/XPBadge';
 import { StreakCounter } from '@/components/StreakCounter';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { useProgress } from '@/contexts/ProgressContext';
 import { letterGroups } from '@/data/letterGroups';
 import { words } from '@/data/words';
 import { sentences } from '@/data/sentences';
 import { paragraphs } from '@/data/paragraphs';
+import { LockKeyholeOpen } from 'lucide-react';
 
 // Rough estimate: knowing N letters enables reading ~X% of common Kannada text
 function estimateReadability(completedLetterIds: string[]): number {
@@ -18,7 +20,7 @@ function estimateReadability(completedLetterIds: string[]): number {
 }
 
 export default function ProgressPage() {
-  const { progress } = useProgress();
+  const { progress, unlockAll } = useProgress();
   const allLetterIds = letterGroups.flatMap(g => g.letterIds);
   const readabilityPct = estimateReadability(progress.completedLetterIds);
 
@@ -122,6 +124,20 @@ export default function ProgressPage() {
             </CardContent>
           </Card>
         )}
+
+        {/* Admin bypass — unlock all groups and stages */}
+        <div className="pt-2 border-t border-dashed border-border">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full text-muted-foreground hover:text-foreground gap-2 text-xs"
+            onClick={unlockAll}
+          >
+            <LockKeyholeOpen size={14} />
+            Unlock all content
+          </Button>
+        </div>
+
       </div>
     </div>
   );

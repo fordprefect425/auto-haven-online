@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import type { UserProgress, LearningStage, QuizScore, LetterReviewRecord } from '@/types/kannada';
+import { letterGroups } from '@/data/letterGroups';
 
 const STORAGE_KEY = 'kannada-app-progress';
 
@@ -40,7 +41,8 @@ type Action =
   | { type: 'ADD_XP'; amount: number }
   | { type: 'UPDATE_STREAK' }
   | { type: 'UNLOCK_GROUP'; groupId: string }
-  | { type: 'SET_STAGE'; stage: LearningStage };
+  | { type: 'SET_STAGE'; stage: LearningStage }
+  | { type: 'UNLOCK_ALL'; allGroupIds: string[] };
 
 function srsIntervalDays(correctStreak: number): number {
   if (correctStreak <= 0) return 0;
@@ -138,6 +140,9 @@ function reducer(state: UserProgress, action: Action): UserProgress {
     case 'SET_STAGE':
       return { ...state, currentStage: action.stage };
 
+    case 'UNLOCK_ALL':
+      return { ...state, currentStage: 4, unlockedGroupIds: action.allGroupIds };
+
     default:
       return state;
   }
@@ -155,6 +160,7 @@ interface ProgressContextValue {
   addXP: (amount: number) => void;
   updateStreak: () => void;
   unlockGroup: (groupId: string) => void;
+  unlockAll: () => void;
   isLetterCompleted: (letterId: string) => boolean;
   isLetterMastered: (letterId: string) => boolean;
   isGroupUnlocked: (groupId: string) => boolean;
@@ -233,6 +239,10 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: 'UNLOCK_GROUP', groupId });
   }, []);
 
+  const unlockAll = useCallback(() => {
+    dispatch({ type: 'UNLOCK_ALL', allGroupIds: letterGroups.map(g => g.id) });
+  }, []);
+
   const isLetterCompleted = useCallback((letterId: string) =>
     progress.completedLetterIds.includes(letterId), [progress.completedLetterIds]);
 
@@ -260,7 +270,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       progress,
       markLetterCompleted, markLetterMastered, recordReview,
       markWordCompleted, markSentenceCompleted, markParagraphCompleted,
-      recordQuizScore, addXP, updateStreak, unlockGroup,
+      recordQuizScore, addXP, updateStreak, unlockGroup, unlockAll,
       isLetterCompleted, isLetterMastered, isGroupUnlocked,
       getGroupProgress, getDueLetterIds,
     }}>
