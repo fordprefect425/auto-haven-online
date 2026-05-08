@@ -53,27 +53,35 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-                // Custom casino colors
-                casino: {
-                    dark: {
-                        900: '#0F0F19',
-                        800: '#121224', 
-                        700: '#1A1A2E',
-                        600: '#252547',
-                    },
-                    purple: {
-                        900: '#3A1464',
-                        800: '#4A1A80',
-                        700: '#5B2099',
-                        600: '#6C27B3',
-                        500: '#7E2ED0',
-                    },
-                    gold: {
-                        500: '#F4BD47',
-                        400: '#F8CA69',
-                        300: '#FAD88B',
-                    },
-                },
+				// Karnataka-inspired palette
+				saffron: {
+					50: '#FFF8F0',
+					100: '#FFF0DC',
+					200: '#FFD9A8',
+					300: '#FFBC6B',
+					400: '#FF9A2E',
+					500: '#F07D00',
+					600: '#C86200',
+					700: '#A04B00',
+				},
+				teal: {
+					50: '#F0FAFA',
+					100: '#D6F2F2',
+					200: '#A8E2E2',
+					300: '#6BCECE',
+					400: '#3AB8B8',
+					500: '#189A9A',
+					600: '#0F7A7A',
+					700: '#0A5C5C',
+				},
+				clay: {
+					50: '#FDF6F0',
+					100: '#FAEADE',
+					200: '#F3CEAF',
+					300: '#E8AE78',
+					400: '#D98A45',
+					500: '#C46D1A',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,6 +92,10 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			fontFamily: {
+				kannada: ['Noto Sans Kannada', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -107,25 +119,26 @@ export default {
 						height: '0'
 					}
 				},
-				'pulse-glow': {
+				'ring-pulse': {
 					'0%, 100%': { opacity: '1', transform: 'scale(1)' },
 					'50%': { opacity: '0.7', transform: 'scale(1.05)' },
 				},
-				'float': {
-					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-10px)' },
+				'bounce-in': {
+					'0%': { transform: 'scale(0.8)', opacity: '0' },
+					'70%': { transform: 'scale(1.05)', opacity: '1' },
+					'100%': { transform: 'scale(1)', opacity: '1' },
 				},
-				'spin-slow': {
-					'from': { transform: 'rotate(0deg)' },
-					'to': { transform: 'rotate(360deg)' },
-				}
+				'slide-up': {
+					'from': { transform: 'translateY(8px)', opacity: '0' },
+					'to': { transform: 'translateY(0)', opacity: '1' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-				'float': 'float 6s ease-in-out infinite',
-				'spin-slow': 'spin-slow 10s linear infinite',
+				'ring-pulse': 'ring-pulse 1.5s ease-in-out infinite',
+				'bounce-in': 'bounce-in 0.4s ease-out',
+				'slide-up': 'slide-up 0.3s ease-out',
 			}
 		}
 	},
