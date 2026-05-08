@@ -41,6 +41,17 @@ export default function ProgressPage() {
       <TopBar title="Progress" showBack={false} />
       <div className="px-4 pt-4 pb-10 space-y-5">
 
+        {/* Admin bypass — unlock all groups and stages */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full gap-2 text-xs border-dashed"
+          onClick={unlockAll}
+        >
+          <LockKeyholeOpen size={14} />
+          Unlock all content (dev)
+        </Button>
+
         {/* XP + Streak */}
         <Card>
           <CardContent className="p-4 flex items-center justify-between">
@@ -125,18 +136,6 @@ export default function ProgressPage() {
           </Card>
         )}
 
-        {/* Admin bypass — unlock all groups and stages */}
-        <div className="pt-2 border-t border-dashed border-border">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="w-full text-muted-foreground hover:text-foreground gap-2 text-xs"
-            onClick={unlockAll}
-          >
-            <LockKeyholeOpen size={14} />
-            Unlock all content
-          </Button>
-        </div>
 
       </div>
     </div>
