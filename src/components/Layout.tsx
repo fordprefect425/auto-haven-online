@@ -1,20 +1,13 @@
+import { Outlet } from 'react-router-dom';
+import { BottomNav } from './BottomNav';
 
-import { ReactNode } from "react";
-import { NavBar } from "./NavBar";
-import { Footer } from "./Footer";
-
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export function Layout({ children }: LayoutProps) {
+export function Layout() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0F0F19] text-white">
-      <NavBar />
-      <main className="flex-grow">
-        {children}
+    <div className="min-h-dvh flex flex-col bg-background">
+      <main className="flex-1 overflow-y-auto pb-20">
+        <Outlet />
       </main>
-      <Footer />
+      <BottomNav />
     </div>
   );
 }
