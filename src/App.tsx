@@ -27,7 +27,7 @@ export default function App() {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Routes>
               {/* Full-screen routes (no bottom nav) */}
               <Route path="/quiz/:quizId" element={<QuizSession />} />

@@ -4,6 +4,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Restore path redirected by 404.html for GitHub Pages SPA support -->
+    <script>
+      (function(){
+        var p = window.location.search.match(/[?&]p=([^&]+)/);
+        if (p) {
+          var path = decodeURIComponent(p[1]).replace(/&/, '?');
+          window.history.replaceState(null, null, '/' + path);
+        }
+      })();
+    </script>
     <title>ಕನ್ನಡ ಓದು | Learn to Read Kannada</title>
     <meta name="description" content="Learn to read Kannada script step by step — starting from individual letters, through words, sentences and paragraphs. For Kannada speakers who want to read." />
     <meta name="author" content="Kannada Odu" />
