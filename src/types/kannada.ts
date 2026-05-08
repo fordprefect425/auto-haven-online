@@ -24,6 +24,9 @@ export interface BrandAnchor {
   context: string;        // e.g., "Fast food restaurants in every city"
   targetLetterIndex: number;
   imageEmoji: string;
+  photoUrl?: string;      // direct Wikimedia Commons or other CC image URL
+  photoAlt?: string;      // alt text for the photo
+  photoCredit?: string;   // attribution (required for Wikimedia CC-BY images)
 }
 
 export interface ExampleWord {
