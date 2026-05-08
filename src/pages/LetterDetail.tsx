@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TopBar } from '@/components/TopBar';
 import { LetterInWordDisplay } from '@/components/LetterInWordDisplay';
+import { BrandAnchorDisplay } from '@/components/BrandAnchorDisplay';
 import { MatraDisplay } from '@/components/MatraDisplay';
 import { MiniQuiz } from '@/components/MiniQuiz';
 import { Button } from '@/components/ui/button';
@@ -46,11 +47,31 @@ export default function LetterDetail() {
       <TopBar title={`${letter.romanization} · ${letter.kannada}`} />
       <div className="px-4 pt-6 pb-10 space-y-8">
 
-        {/* Step 1: See the letter in a word first */}
+        {/* Step 0: Brand-anchored hook — "You see this every day" */}
+        {letter.brandAnchor && (
+          <section className="space-y-4">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+              You see this every day
+            </h2>
+            <div className="bg-gradient-to-br from-yellow-50 to-saffron-50 rounded-2xl p-6 border-2 border-yellow-300">
+              <BrandAnchorDisplay
+                brandAnchor={letter.brandAnchor}
+                onTapHighlighted={handleTapHighlighted}
+              />
+              {!showIsolated && (
+                <p className="text-center text-xs text-saffron-700 mt-4 font-medium">
+                  ↑ Tap the glowing letter to learn it
+                </p>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Step 1: See the letter in a familiar word */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              You already say this word
+              {letter.brandAnchor ? 'In words you already say' : 'You already say this word'}
             </h2>
             <div className="flex items-center gap-1">
               <button

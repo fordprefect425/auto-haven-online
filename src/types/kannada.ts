@@ -17,6 +17,15 @@ export interface AnchorWord {
   imageEmoji: string;
 }
 
+// Real-world brand/sign anchor — environmental print recognition
+export interface BrandAnchor {
+  kannada: string;        // e.g., "ಕೆಎಫ್‌ಸಿ"
+  brandName: string;      // e.g., "KFC"
+  context: string;        // e.g., "Fast food restaurants in every city"
+  targetLetterIndex: number;
+  imageEmoji: string;
+}
+
 export interface ExampleWord {
   kannada: string;
   romanization: string;
@@ -33,6 +42,7 @@ export interface KannadaLetter {
   groupName: string;
   orderInGroup: number;
   anchorWords: AnchorWord[]; // 3 real words showing the letter in context
+  brandAnchor?: BrandAnchor; // optional real-world brand/sign for environmental print
   exampleWords: ExampleWord[];
   matras?: string[]; // vowel diacritic combinations (for consonants)
 }

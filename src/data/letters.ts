@@ -1,6 +1,7 @@
 import type { KannadaLetter } from '@/types/kannada';
+import { letterBrandAnchors } from './letterBrandAnchors';
 
-export const letters: KannadaLetter[] = [
+const lettersRaw: KannadaLetter[] = [
   // ── BASIC VOWELS ──────────────────────────────────────────────
   {
     id: 'a', kannada: 'ಅ', romanization: 'a', type: 'vowel',
@@ -704,6 +705,11 @@ export const letters: KannadaLetter[] = [
     ],
   },
 ];
+
+// Merge real-world brand anchors into letters that have them.
+export const letters: KannadaLetter[] = lettersRaw.map(l =>
+  letterBrandAnchors[l.id] ? { ...l, brandAnchor: letterBrandAnchors[l.id] } : l
+);
 
 export const letterMap: Map<string, KannadaLetter> = new Map(
   letters.map(l => [l.id, l])
