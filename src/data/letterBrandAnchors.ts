@@ -50,6 +50,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'Electricity board signs across Karnataka',
     targetLetterIndex: 0,
     imageEmoji: '⚡',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Electricity_meters_in_India.JPG',
+    photoAlt: 'Electricity meters in India — the kind managed by ESCOM/BESCOM',
+    photoCredit: 'Wikimedia Commons',
   },
   ka: {
     kannada: 'ಕರ್ನಾಟಕ',
@@ -97,6 +100,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'On every clinic signboard — essential to read',
     targetLetterIndex: 0,
     imageEmoji: '👨‍⚕️',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Victoria_Hospital_Main_Entrance.JPG',
+    photoAlt: 'Victoria Hospital main entrance, Bengaluru — a landmark government hospital',
+    photoCredit: 'Wikimedia Commons',
   },
   ta: {
     kannada: 'ತಾಲೂಕು',
@@ -154,6 +160,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: "Bengaluru's homegrown e-commerce giant — delivery boxes everywhere",
     targetLetterIndex: 0,
     imageEmoji: '📦',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Logo_header_flipkart.png',
+    photoAlt: 'Flipkart logo — the Bengaluru-born e-commerce giant',
+    photoCredit: 'Wikimedia Commons',
   },
   ba: {
     kannada: 'ಬೆಂಗಳೂರು',
@@ -231,6 +240,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'On every school signboard across Karnataka',
     targetLetterIndex: 0,
     imageEmoji: '🏫',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/78/School_roadsign_Mysore.jpg',
+    photoAlt: 'School road sign in Mysore, Karnataka',
+    photoCredit: 'Wikimedia Commons',
   },
   sa: {
     kannada: 'ಸರ್ಕಾರಿ',
@@ -238,6 +250,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'On every government office and notice board',
     targetLetterIndex: 0,
     imageEmoji: '🏢',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Karnataka_High_Court_front_view.jpg',
+    photoAlt: 'Karnataka High Court front view — a major government building in Bengaluru',
+    photoCredit: 'Wikimedia Commons',
   },
   ha: {
     kannada: 'ಹಾಲು',
@@ -245,5 +260,8 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'On every Nandini milk packet you buy',
     targetLetterIndex: 0,
     imageEmoji: '🥛',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/83/Milk_Booth_Sign_Nandini_Mysore_May24_A7CR_00080.jpg',
+    photoAlt: 'Nandini milk booth sign in Mysore, Karnataka',
+    photoCredit: 'Wikimedia Commons',
   },
 };
