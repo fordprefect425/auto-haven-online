@@ -2,9 +2,7 @@ import type { BrandAnchor } from '@/types/kannada';
 
 // Real-world Karnataka brand/sign anchors for environmental print recognition.
 // Source: .claude/skills/kannada-reading-app/references/letter-to-brand-mapping.md
-// Photos sourced from Wikimedia Commons (CC-BY / CC-BY-SA) and are loaded
-// as external URLs — no local copies needed for GitHub Pages deployment.
-// targetLetterIndex: grapheme index (via Intl.Segmenter) of the target letter.
+// Photos: Wikimedia Commons (CC-BY / CC-BY-SA), served as external URLs.
 export const letterBrandAnchors: Record<string, BrandAnchor> = {
   a: {
     kannada: 'ಅಂಚೆ',
@@ -13,7 +11,7 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     targetLetterIndex: 0,
     imageEmoji: '📮',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/An_indian_post_office.JPG',
-    photoAlt: 'An Indian post office building in Karnataka with Kannada signboard',
+    photoAlt: 'An Indian post office building in Karnataka',
     photoCredit: 'Wikimedia Commons',
   },
   aa: {
@@ -23,7 +21,7 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     targetLetterIndex: 0,
     imageEmoji: '🏥',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Apollo_Hospitals_Bengaluru.jpg',
-    photoAlt: 'Apollo Hospitals Bengaluru building with signboard',
+    photoAlt: 'Apollo Hospitals Bengaluru',
     photoCredit: 'Wikimedia Commons',
   },
   i: {
@@ -33,15 +31,18 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     targetLetterIndex: 0,
     imageEmoji: '🍱',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Indira-canteen-thippasandra.jpg',
-    photoAlt: 'Indira Canteen in Thippasandra, Bengaluru with Kannada signboard',
+    photoAlt: 'Indira Canteen in Thippasandra, Bengaluru',
     photoCredit: 'Wikimedia Commons',
   },
   u: {
     kannada: 'ಉಡುಪಿ',
-    brandName: 'Udupi Hotel',
-    context: 'The classic South Indian restaurant you see everywhere',
+    brandName: 'Udupi',
+    context: 'Udupi — the coastal Karnataka town whose name became synonymous with South Indian restaurants worldwide',
     targetLetterIndex: 0,
     imageEmoji: '🍛',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Sri_Chandramouleeswara_Temple_Udupi.JPG',
+    photoAlt: 'Sri Chandramouleshwara Temple in Udupi, Karnataka',
+    photoCredit: 'Wikimedia Commons',
   },
   e: {
     kannada: 'ಎಸ್ಕಾಂ',
@@ -57,15 +58,18 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     targetLetterIndex: 0,
     imageEmoji: '🚌',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/KSRTC_Bus_Stand_Shimoga.JPG',
-    photoAlt: 'KSRTC bus stand in Shimoga, Karnataka with Kannada signboards',
+    photoAlt: 'KSRTC bus stand in Shimoga, Karnataka',
     photoCredit: 'Wikimedia Commons',
   },
   ga: {
     kannada: 'ಗಾಂಧಿ',
     brandName: 'Gandhi Bazaar',
-    context: "One of Bengaluru's oldest and busiest market areas",
+    context: "One of Bengaluru's oldest and busiest market areas in Basavanagudi",
     targetLetterIndex: 0,
     imageEmoji: '🛍️',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Gandhi_Bazaar_Circle.jpg',
+    photoAlt: 'Gandhi Bazaar Circle in Bengaluru',
+    photoCredit: 'Wikimedia Commons',
   },
   ja: {
     kannada: 'ಜಯದೇವ',
@@ -100,13 +104,19 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'Government taluk office signs in every Karnataka town',
     targetLetterIndex: 0,
     imageEmoji: '🏛️',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Bilagi_Taluk.jpg',
+    photoAlt: 'Bilagi Taluk office in Karnataka',
+    photoCredit: 'Wikimedia Commons',
   },
   da: {
     kannada: 'ದರ್ಶಿನಿ',
     brandName: 'Darshini',
-    context: 'Quick-service tiffin restaurants found across Bengaluru',
+    context: 'Quick-service tiffin restaurants across Bengaluru — idli, dosa, vada',
     targetLetterIndex: 0,
     imageEmoji: '☕',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Idli_sambar.JPG',
+    photoAlt: 'Idli and sambar — the classic Darshini breakfast',
+    photoCredit: 'Wikimedia Commons',
   },
   dha: {
     kannada: 'ಧಾರವಾಡ',
@@ -124,6 +134,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: "Karnataka's milk brand — on every milk packet, curd cup, and ghee tin",
     targetLetterIndex: 0,
     imageEmoji: '🥛',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Milk_Booth_Nandini_Siddhartha_Mysore_May24_A7CR_00081-2_Pano.jpg',
+    photoAlt: 'Nandini milk booth in Mysore, Karnataka',
+    photoCredit: 'Wikimedia Commons',
   },
   pa: {
     kannada: 'ಪೊಲೀಸ್',
@@ -131,6 +144,9 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     context: 'On every police station and patrol vehicle',
     targetLetterIndex: 0,
     imageEmoji: '👮',
+    photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Police_Station_at_Bhavani_Peth.JPG',
+    photoAlt: 'An Indian police station building',
+    photoCredit: 'Wikimedia Commons',
   },
   pha: {
     kannada: 'ಫ್ಲಿಪ್ಕಾರ್ಟ್',
@@ -162,11 +178,11 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
   ma: {
     kannada: 'ಮೈಸೂರು',
     brandName: 'Mysuru Palace',
-    context: "On Mysuru Palace entrance boards, MTR products, and city signs",
+    context: 'On Mysuru Palace entrance boards, MTR products, and city signs',
     targetLetterIndex: 0,
     imageEmoji: '🏰',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/The_Mysore_Palace.JPG',
-    photoAlt: 'The Mysore Palace, a grand historical palace in Karnataka',
+    photoAlt: 'The Mysore Palace, Karnataka',
     photoCredit: 'Wikimedia Commons',
   },
   ya: {
@@ -206,7 +222,7 @@ export const letterBrandAnchors: Record<string, BrandAnchor> = {
     targetLetterIndex: 0,
     imageEmoji: '🏛️',
     photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Vidhana_Soudha_Bangalore.jpg',
-    photoAlt: 'Vidhana Soudha, the Karnataka State Legislature building in Bengaluru',
+    photoAlt: 'Vidhana Soudha, Karnataka State Legislature, Bengaluru',
     photoCredit: 'Wikimedia Commons',
   },
   sha: {
