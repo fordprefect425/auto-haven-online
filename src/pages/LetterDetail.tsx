@@ -10,7 +10,7 @@ import { useProgress } from '@/contexts/ProgressContext';
 import { useTTS } from '@/hooks/useTTS';
 import { getLetterById } from '@/data/letters';
 import { letterGroups } from '@/data/letterGroups';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
 
 export default function LetterDetail() {
   const { letterId } = useParams<{ letterId: string }>();

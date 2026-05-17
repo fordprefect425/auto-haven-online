@@ -17,7 +17,17 @@ export function markOnboarded() {
 
 export function hasOnboarded(): boolean {
   try {
-    return localStorage.getItem(ONBOARDED_KEY) === 'true';
+    if (localStorage.getItem(ONBOARDED_KEY) === 'true') return true;
+    // Existing users who already have progress skip onboarding automatically
+    const raw = localStorage.getItem('kannada-app-progress');
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p?.completedLetterIds?.length > 0 || p?.xpTotal > 0) {
+        localStorage.setItem(ONBOARDED_KEY, 'true');
+        return true;
+      }
+    }
+    return false;
   } catch {
     return false;
   }
