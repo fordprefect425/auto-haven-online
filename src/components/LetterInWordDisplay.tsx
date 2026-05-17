@@ -1,4 +1,6 @@
 import type { AnchorWord } from '@/types/kannada';
+import { Volume2 } from 'lucide-react';
+import { useTTS } from '@/hooks/useTTS';
 
 interface LetterInWordDisplayProps {
   anchorWord: AnchorWord;
@@ -17,6 +19,7 @@ function splitGraphemes(text: string): string[] {
 export function LetterInWordDisplay({ anchorWord, onTapHighlighted }: LetterInWordDisplayProps) {
   const graphemes = splitGraphemes(anchorWord.kannada);
   const targetIdx = anchorWord.targetLetterIndex;
+  const { speak, supported: ttsSupported } = useTTS();
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -42,7 +45,7 @@ export function LetterInWordDisplay({ anchorWord, onTapHighlighted }: LetterInWo
         })}
       </div>
 
-      {/* Word info */}
+      {/* Word info + speaker */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span className="text-2xl">{anchorWord.imageEmoji}</span>
         <div>
@@ -50,6 +53,15 @@ export function LetterInWordDisplay({ anchorWord, onTapHighlighted }: LetterInWo
           <span className="mx-1">·</span>
           <span>{anchorWord.meaning}</span>
         </div>
+        {ttsSupported && (
+          <button
+            onClick={() => speak(anchorWord.kannada)}
+            aria-label={`Hear "${anchorWord.romanization}"`}
+            className="ml-1 p-1.5 rounded-full hover:bg-saffron-100 transition-colors"
+          >
+            <Volume2 size={16} className="text-saffron-600" />
+          </button>
+        )}
       </div>
 
       {/* Position label */}

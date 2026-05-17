@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TopBar } from '@/components/TopBar';
 import { LetterInWordDisplay } from '@/components/LetterInWordDisplay';
 import { BrandAnchorDisplay } from '@/components/BrandAnchorDisplay';
 import { MatraDisplay } from '@/components/MatraDisplay';
 import { MiniQuiz } from '@/components/MiniQuiz';
+import { ShareButton } from '@/components/ShareButton';
 import { Button } from '@/components/ui/button';
 import { useProgress } from '@/contexts/ProgressContext';
+import { useTTS } from '@/hooks/useTTS';
 import { getLetterById } from '@/data/letters';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
 
 export default function LetterDetail() {
   const { letterId } = useParams<{ letterId: string }>();
@@ -21,6 +23,14 @@ export default function LetterDetail() {
   const [showMiniQuiz, setShowMiniQuiz] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
   const [quizCorrect, setQuizCorrect] = useState(false);
+  const { speak, supported: ttsSupported } = useTTS();
+
+  // Auto-speak the letter on isolation — anchors the sound to the visual
+  useEffect(() => {
+    if (showIsolated && ttsSupported && letter) {
+      speak(letter.kannada);
+    }
+  }, [showIsolated, ttsSupported, letter, speak]);
 
   if (!letter) {
     return <div className="p-8 text-center text-muted-foreground">Letter not found.</div>;
@@ -121,6 +131,16 @@ export default function LetterDetail() {
                 <p className="text-2xl font-bold text-primary">{letter.romanization}</p>
                 <p className="text-sm text-muted-foreground">{letter.pronunciationHint}</p>
               </div>
+              {ttsSupported && (
+                <button
+                  onClick={() => speak(letter.kannada)}
+                  aria-label={`Hear "${letter.romanization}"`}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-saffron-100 hover:bg-saffron-200 text-saffron-700 font-medium text-sm transition-colors"
+                >
+                  <Volume2 size={16} />
+                  Hear it
+                </button>
+              )}
             </div>
 
             {/* Vowel combinations */}
@@ -158,6 +178,12 @@ export default function LetterDetail() {
                   : `+5 XP earned. This letter will appear in tomorrow's review.`}
               </p>
             </div>
+            <ShareButton
+              text={`Just learned ${letter.kannada} ("${letter.romanization}")${letter.brandAnchor ? ` from ${letter.brandAnchor.brandName}` : ''}! Free Kannada reading app:`}
+              label="Share this letter"
+              variant="outline"
+              className="w-full"
+            />
             <Button
               variant="outline"
               className="w-full"

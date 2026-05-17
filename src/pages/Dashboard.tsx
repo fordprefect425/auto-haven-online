@@ -5,6 +5,8 @@ import { LearningPath } from '@/components/LearningPath';
 import { ReviewDueBanner } from '@/components/ReviewDueBanner';
 import { StreakCounter } from '@/components/StreakCounter';
 import { XPBadge } from '@/components/XPBadge';
+import { DailyAnchorCard } from '@/components/DailyAnchorCard';
+import { ShareButton } from '@/components/ShareButton';
 import { useProgress } from '@/contexts/ProgressContext';
 import { letterGroups } from '@/data/letterGroups';
 
@@ -51,6 +53,9 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Featured "Try this letter" card — surfaces the brand-anchor hook on every visit */}
+      <DailyAnchorCard />
+
       {/* Review banner */}
       <ReviewDueBanner dueCount={dueCount} />
 
@@ -94,6 +99,28 @@ export default function Dashboard() {
 
       {/* Learning path */}
       <LearningPath />
+
+      {/* Share CTA — appears after first letter completed */}
+      {progress.completedLetterIds.length >= 1 && (
+        <div className="px-4 mt-6">
+          <Card className="bg-teal-50 border-teal-200">
+            <CardContent className="p-4 flex items-center justify-between gap-3">
+              <div className="text-sm">
+                <p className="font-semibold">Know someone who can't read Kannada?</p>
+                <p className="text-muted-foreground text-xs mt-0.5">
+                  Send them this app — it works on any phone.
+                </p>
+              </div>
+              <ShareButton
+                text="ಕನ್ನಡ ಓದು ಕಲಿಯೋಣ! Free app that teaches Kannada reading using everyday Karnataka brands (KSRTC, Nandini, Vidhana Soudha)."
+                label="Send"
+                variant="default"
+                className="bg-teal-600 hover:bg-teal-700 text-white shrink-0"
+              />
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

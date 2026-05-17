@@ -1,4 +1,6 @@
 import type { BrandAnchor } from '@/types/kannada';
+import { Volume2 } from 'lucide-react';
+import { useTTS } from '@/hooks/useTTS';
 
 interface BrandAnchorDisplayProps {
   brandAnchor: BrandAnchor;
@@ -16,6 +18,7 @@ function splitGraphemes(text: string): string[] {
 export function BrandAnchorDisplay({ brandAnchor, onTapHighlighted }: BrandAnchorDisplayProps) {
   const graphemes = splitGraphemes(brandAnchor.kannada);
   const targetIdx = brandAnchor.targetLetterIndex;
+  const { speak, supported: ttsSupported } = useTTS();
 
   const highlightedWord = (
     <div className="flex items-center gap-0 font-kannada text-5xl font-bold tracking-wide flex-wrap justify-center">
@@ -70,6 +73,15 @@ export function BrandAnchorDisplay({ brandAnchor, onTapHighlighted }: BrandAncho
       <div className="flex items-center gap-2 text-sm">
         {!brandAnchor.photoUrl && <span className="text-2xl">{brandAnchor.imageEmoji}</span>}
         <span className="font-bold text-foreground">{brandAnchor.brandName}</span>
+        {ttsSupported && (
+          <button
+            onClick={() => speak(brandAnchor.kannada)}
+            aria-label={`Hear "${brandAnchor.brandName}"`}
+            className="p-1.5 rounded-full hover:bg-saffron-100 transition-colors"
+          >
+            <Volume2 size={16} className="text-saffron-600" />
+          </button>
+        )}
       </div>
 
       <p className="text-xs text-muted-foreground text-center max-w-xs px-2">

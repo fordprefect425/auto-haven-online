@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/toaster';
@@ -17,6 +18,12 @@ import QuizSession from '@/pages/QuizSession';
 import ReviewSession from '@/pages/ReviewSession';
 import ProgressPage from '@/pages/ProgressPage';
 import NotFound from '@/pages/NotFound';
+import Onboarding, { hasOnboarded } from '@/pages/Onboarding';
+
+function OnboardingGuard({ children }: { children: ReactNode }) {
+  if (!hasOnboarded()) return <Navigate to="/welcome" replace />;
+  return <>{children}</>;
+}
 
 const queryClient = new QueryClient();
 
@@ -29,12 +36,15 @@ export default function App() {
           <Sonner />
           <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Routes>
-              {/* Full-screen routes (no bottom nav) */}
-              <Route path="/quiz/:quizId" element={<QuizSession />} />
-              <Route path="/review" element={<ReviewSession />} />
+              {/* First-visit onboarding (no nav, no guard) */}
+              <Route path="/welcome" element={<Onboarding />} />
 
-              {/* Main app shell with bottom nav */}
-              <Route element={<Layout />}>
+              {/* Full-screen routes (no bottom nav) */}
+              <Route path="/quiz/:quizId" element={<OnboardingGuard><QuizSession /></OnboardingGuard>} />
+              <Route path="/review" element={<OnboardingGuard><ReviewSession /></OnboardingGuard>} />
+
+              {/* Main app shell with bottom nav — gated by onboarding */}
+              <Route element={<OnboardingGuard><Layout /></OnboardingGuard>}>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/learn/alphabets" element={<AlphabetsOverview />} />
                 <Route path="/learn/alphabets/:groupId" element={<AlphabetGroupDetail />} />
