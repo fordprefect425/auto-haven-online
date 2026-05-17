@@ -11,19 +11,27 @@ export const letterGroups: KannadaLetterGroup[] = [
     letterIds: ['a', 'aa', 'i', 'ii', 'u', 'uu'],
   },
   {
-    id: 'vowels-extended',
-    name: 'Extended Vowels',
-    nameKannada: 'ವಿಸ್ತೃತ ಸ್ವರಗಳು',
-    description: 'The remaining vowels including diphthongs and special markers',
+    id: 'vowels-extended-1',
+    name: 'Extended Vowels I',
+    nameKannada: 'ವಿಸ್ತೃತ ಸ್ವರಗಳು — ೧',
+    description: 'Four more vowels — ṛ, e, ē, ai',
     stageOrder: 2,
-    letterIds: ['ru', 'e', 'ee', 'ai', 'o', 'oo', 'au', 'am', 'ah'],
+    letterIds: ['ru', 'e', 'ee', 'ai'],
+  },
+  {
+    id: 'vowels-extended-2',
+    name: 'Extended Vowels II',
+    nameKannada: 'ವಿಸ್ತೃತ ಸ್ವರಗಳು — ೨',
+    description: 'Final vowels and special markers — o, ō, au, anusvara, visarga',
+    stageOrder: 3,
+    letterIds: ['o', 'oo', 'au', 'am', 'ah'],
   },
   {
     id: 'velar',
     name: 'Velar Stops',
     nameKannada: 'ಕ ವರ್ಗ',
     description: 'Sounds made at the back of the throat — ka, kha, ga, gha, nga',
-    stageOrder: 3,
+    stageOrder: 4,
     letterIds: ['ka', 'kha', 'ga', 'gha', 'nga'],
   },
   {
@@ -31,7 +39,7 @@ export const letterGroups: KannadaLetterGroup[] = [
     name: 'Palatal Stops',
     nameKannada: 'ಚ ವರ್ಗ',
     description: 'Sounds made at the palate — cha, chha, ja, jha, nya',
-    stageOrder: 4,
+    stageOrder: 5,
     letterIds: ['cha', 'chha', 'ja', 'jha', 'nya'],
   },
   {
@@ -39,7 +47,7 @@ export const letterGroups: KannadaLetterGroup[] = [
     name: 'Retroflex Stops',
     nameKannada: 'ಟ ವರ್ಗ',
     description: 'Tongue curled back to the roof — ṭa, ṭha, ḍa, ḍha, ṇa',
-    stageOrder: 5,
+    stageOrder: 6,
     letterIds: ['ta_retro', 'tha_retro', 'da_retro', 'dha_retro', 'na_retro'],
   },
   {
@@ -47,7 +55,7 @@ export const letterGroups: KannadaLetterGroup[] = [
     name: 'Dental Stops',
     nameKannada: 'ತ ವರ್ಗ',
     description: 'Tongue touching upper teeth — ta, tha, da, dha, na',
-    stageOrder: 6,
+    stageOrder: 7,
     letterIds: ['ta', 'tha', 'da', 'dha', 'na'],
   },
   {
@@ -55,7 +63,7 @@ export const letterGroups: KannadaLetterGroup[] = [
     name: 'Labial Stops',
     nameKannada: 'ಪ ವರ್ಗ',
     description: 'Sounds from the lips — pa, pha, ba, bha, ma',
-    stageOrder: 7,
+    stageOrder: 8,
     letterIds: ['pa', 'pha', 'ba', 'bha', 'ma'],
   },
   {
@@ -63,7 +71,7 @@ export const letterGroups: KannadaLetterGroup[] = [
     name: 'Semivowels & Sibilants',
     nameKannada: 'ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ',
     description: 'Glides, liquids, and hissing sounds — ya, ra, la, va, sha, ṣha, sa, ha, ḷa',
-    stageOrder: 8,
+    stageOrder: 9,
     letterIds: ['ya', 'ra', 'la', 'va', 'sha', 'sha_retro', 'sa', 'ha', 'la_retro'],
   },
 ];

@@ -26,7 +26,7 @@ function makeInitialProgress(): UserProgress {
     xpTotal: 0,
     streakDays: 0,
     lastActivityDate: '',
-    unlockedGroupIds: ['vowels-basic', 'vowels-extended'],
+    unlockedGroupIds: ['vowels-basic', 'vowels-extended-1'],
   };
 }
 
@@ -174,7 +174,16 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [progress, dispatch] = useReducer(reducer, null, () => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return JSON.parse(stored) as UserProgress;
+      if (stored) {
+        const p = JSON.parse(stored) as UserProgress;
+        // Migration: old 'vowels-extended' → split into two new groups
+        if (p.unlockedGroupIds?.includes('vowels-extended')) {
+          p.unlockedGroupIds = p.unlockedGroupIds
+            .filter(id => id !== 'vowels-extended')
+            .concat(['vowels-extended-1', 'vowels-extended-2']);
+        }
+        return p;
+      }
     } catch {}
     return makeInitialProgress();
   });

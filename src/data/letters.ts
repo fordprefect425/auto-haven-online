@@ -91,7 +91,7 @@ const lettersRaw: KannadaLetter[] = [
   // ── EXTENDED VOWELS ───────────────────────────────────────────
   {
     id: 'ru', kannada: 'ಋ', romanization: 'ru', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 1,
+    groupId: 'vowels-extended-1', groupName: 'Extended Vowels I', orderInGroup: 1,
     pronunciationHint: "Vocalic 'r' — a rolled r sound that acts as a vowel",
     anchorWords: [
       { kannada: 'ಋಷಿ', romanization: 'rushi', meaning: 'sage / saint', targetLetterIndex: 0, position: 'initial', imageEmoji: '🧘' },
@@ -105,7 +105,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'e', kannada: 'ಎ', romanization: 'e', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 2,
+    groupId: 'vowels-extended-1', groupName: 'Extended Vowels I', orderInGroup: 2,
     pronunciationHint: "Short 'e' — like 'e' in 'bed'",
     anchorWords: [
       { kannada: 'ಎಲೆ', romanization: 'ele', meaning: 'leaf', targetLetterIndex: 0, position: 'initial', imageEmoji: '🍃' },
@@ -119,7 +119,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'ee', kannada: 'ಏ', romanization: 'ee', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 3,
+    groupId: 'vowels-extended-1', groupName: 'Extended Vowels I', orderInGroup: 3,
     pronunciationHint: "Long 'ay' — like 'a' in 'late'",
     anchorWords: [
       { kannada: 'ಏನು', romanization: 'eenu', meaning: 'what?', targetLetterIndex: 0, position: 'initial', imageEmoji: '❓' },
@@ -133,7 +133,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'ai', kannada: 'ಐ', romanization: 'ai', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 4,
+    groupId: 'vowels-extended-1', groupName: 'Extended Vowels I', orderInGroup: 4,
     pronunciationHint: "Diphthong — like 'i' in 'kite'",
     anchorWords: [
       { kannada: 'ಐದು', romanization: 'aidu', meaning: 'five', targetLetterIndex: 0, position: 'initial', imageEmoji: '5️⃣' },
@@ -147,7 +147,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'o', kannada: 'ಒ', romanization: 'o', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 5,
+    groupId: 'vowels-extended-2', groupName: 'Extended Vowels II', orderInGroup: 1,
     pronunciationHint: "Short 'o' — like 'o' in 'hot'",
     anchorWords: [
       { kannada: 'ಒಳ್ಳೆ', romanization: 'olle', meaning: 'good', targetLetterIndex: 0, position: 'initial', imageEmoji: '👍' },
@@ -161,7 +161,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'oo', kannada: 'ಓ', romanization: 'oo', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 6,
+    groupId: 'vowels-extended-2', groupName: 'Extended Vowels II', orderInGroup: 2,
     pronunciationHint: "Long 'oo' — like 'o' in 'go'",
     anchorWords: [
       { kannada: 'ಓಡು', romanization: 'oodu', meaning: 'to run', targetLetterIndex: 0, position: 'initial', imageEmoji: '🏃' },
@@ -175,7 +175,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'au', kannada: 'ಔ', romanization: 'au', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 7,
+    groupId: 'vowels-extended-2', groupName: 'Extended Vowels II', orderInGroup: 3,
     pronunciationHint: "Diphthong — like 'ow' in 'cow'",
     anchorWords: [
       { kannada: 'ಔಷಧ', romanization: 'aushadha', meaning: 'medicine', targetLetterIndex: 0, position: 'initial', imageEmoji: '💊' },
@@ -189,7 +189,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'am', kannada: 'ಅಂ', romanization: 'am', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 8,
+    groupId: 'vowels-extended-2', groupName: 'Extended Vowels II', orderInGroup: 4,
     pronunciationHint: "Anusvara — nasal 'am', like humming 'ng' at end",
     anchorWords: [
       { kannada: 'ಅಂಗಡಿ', romanization: 'angadi', meaning: 'shop', targetLetterIndex: 0, position: 'initial', imageEmoji: '🏪' },
@@ -203,7 +203,7 @@ const lettersRaw: KannadaLetter[] = [
   },
   {
     id: 'ah', kannada: 'ಅಃ', romanization: 'ah', type: 'vowel',
-    groupId: 'vowels-extended', groupName: 'Extended Vowels', orderInGroup: 9,
+    groupId: 'vowels-extended-2', groupName: 'Extended Vowels II', orderInGroup: 5,
     pronunciationHint: "Visarga — a breathy release at end, like a soft 'h'",
     anchorWords: [
       { kannada: 'ದುಃಖ', romanization: 'dukkha', meaning: 'sorrow / sadness', targetLetterIndex: 1, position: 'medial', imageEmoji: '😢' },
