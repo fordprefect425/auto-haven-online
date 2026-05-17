@@ -5,12 +5,12 @@ import { LetterInWordDisplay } from '@/components/LetterInWordDisplay';
 import { BrandAnchorDisplay } from '@/components/BrandAnchorDisplay';
 import { MatraDisplay } from '@/components/MatraDisplay';
 import { MiniQuiz } from '@/components/MiniQuiz';
-import { ShareButton } from '@/components/ShareButton';
 import { Button } from '@/components/ui/button';
 import { useProgress } from '@/contexts/ProgressContext';
 import { useTTS } from '@/hooks/useTTS';
 import { getLetterById } from '@/data/letters';
-import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
+import { letterGroups } from '@/data/letterGroups';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function LetterDetail() {
   const { letterId } = useParams<{ letterId: string }>();
@@ -38,6 +38,11 @@ export default function LetterDetail() {
 
   const currentAnchor = letter.anchorWords[anchorIndex];
   const isCompleted = isLetterCompleted(letter.id);
+
+  // Find the next letter in the same group
+  const currentGroup = letterGroups.find(g => g.id === letter.groupId);
+  const currentGroupIndex = currentGroup?.letterIds.indexOf(letter.id) ?? -1;
+  const nextLetterId = currentGroup?.letterIds[currentGroupIndex + 1] ?? null;
 
   const handleTapHighlighted = () => {
     setShowIsolated(true);
@@ -178,12 +183,21 @@ export default function LetterDetail() {
                   : `+5 XP earned. This letter will appear in tomorrow's review.`}
               </p>
             </div>
-            <ShareButton
-              text={`Just learned ${letter.kannada} ("${letter.romanization}")${letter.brandAnchor ? ` from ${letter.brandAnchor.brandName}` : ''}! Free Kannada reading app:`}
-              label="Share this letter"
-              variant="outline"
-              className="w-full"
-            />
+            {nextLetterId ? (
+              <Button
+                className="w-full bg-saffron-500 hover:bg-saffron-600 text-white"
+                onClick={() => navigate(`/learn/letter/${nextLetterId}`, { replace: true })}
+              >
+                Next letter →
+              </Button>
+            ) : (
+              <Button
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white"
+                onClick={() => navigate(`/learn/alphabets/${letter.groupId}`, { replace: true })}
+              >
+                ✓ Group complete — back to overview
+              </Button>
+            )}
             <Button
               variant="outline"
               className="w-full"
