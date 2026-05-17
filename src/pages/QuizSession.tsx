@@ -1,17 +1,18 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { QuizCard } from '@/components/QuizCard';
 import { ProgressBar } from '@/components/ProgressBar';
 import { Button } from '@/components/ui/button';
 import { useQuiz } from '@/hooks/useQuiz';
 import { useProgress } from '@/contexts/ProgressContext';
 import { generateQuizForGroup, generateInterleavedQuiz } from '@/data/quizzes';
+import { getNextGroupId } from '@/data/letterGroups';
 import { X } from 'lucide-react';
 
 export default function QuizSession() {
   const { quizId } = useParams<{ quizId: string }>();
   const navigate = useNavigate();
-  const { addXP, recordQuizScore, progress } = useProgress();
+  const { addXP, recordQuizScore, progress, unlockGroup, isGroupUnlocked } = useProgress();
 
   const quiz = useMemo(() => {
     if (!quizId) return null;
@@ -42,6 +43,28 @@ export default function QuizSession() {
     setTimeout(nextQuestion, 1200);
   };
 
+  // Was this a group quiz? If so, find the next group to unlock on pass.
+  const groupIdFromQuiz = quizId?.startsWith('group-') ? quizId.slice('group-'.length) : null;
+  const nextGroupId = groupIdFromQuiz ? getNextGroupId(groupIdFromQuiz) : null;
+  const justUnlockedNextGroup =
+    isComplete && score >= 80 && nextGroupId && !isGroupUnlocked(nextGroupId);
+
+  const completionHandledRef = useRef(false);
+  useEffect(() => {
+    if (!isComplete || completionHandledRef.current || !quiz) return;
+    completionHandledRef.current = true;
+    recordQuizScore({
+      quizId: quiz.id,
+      score,
+      attemptedAt: new Date().toISOString(),
+      correctCount,
+      totalCount: totalQuestions,
+    });
+    if (justUnlockedNextGroup && nextGroupId) {
+      unlockGroup(nextGroupId);
+    }
+  }, [isComplete]); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!quiz || quiz.questions.length === 0) {
     return (
       <div className="min-h-dvh flex flex-col items-center justify-center gap-4 p-8">
@@ -52,20 +75,18 @@ export default function QuizSession() {
   }
 
   if (isComplete) {
-    // Record score
-    recordQuizScore({
-      quizId: quiz.id,
-      score,
-      attemptedAt: new Date().toISOString(),
-      correctCount,
-      totalCount: totalQuestions,
-    });
+    // Recording + unlocking are handled by the useEffect above.
 
     return (
       <div className="min-h-dvh flex flex-col items-center justify-center gap-6 p-8">
         <div className="text-center space-y-2">
           <p className="text-6xl">{score >= 80 ? '🎉' : score >= 60 ? '👍' : '💪'}</p>
           <h1 className="text-2xl font-bold">{quiz.title} Complete!</h1>
+          {justUnlockedNextGroup && (
+            <p className="text-saffron-600 font-semibold text-sm mt-1">
+              🔓 You unlocked the next group!
+            </p>
+          )}
           <p className="text-muted-foreground">
             {correctCount} / {totalQuestions} correct
           </p>

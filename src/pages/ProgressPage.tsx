@@ -41,16 +41,20 @@ export default function ProgressPage() {
       <TopBar title="Progress" showBack={false} />
       <div className="px-4 pt-4 pb-10 space-y-5">
 
-        {/* Admin bypass — unlock all groups and stages */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full gap-2 text-xs border-dashed"
-          onClick={unlockAll}
-        >
-          <LockKeyholeOpen size={14} />
-          Unlock all content (dev)
-        </Button>
+        {/* Admin bypass — only rendered in development builds.
+            In production, group unlocks happen via the new auto-unlock rule
+            (finish a group's letters or pass its quiz with >= 80%). */}
+        {import.meta.env.DEV && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full gap-2 text-xs border-dashed"
+            onClick={unlockAll}
+          >
+            <LockKeyholeOpen size={14} />
+            Unlock all content (dev)
+          </Button>
+        )}
 
         {/* XP + Streak */}
         <Card>

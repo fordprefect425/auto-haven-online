@@ -50,10 +50,18 @@ export default function LetterDetail() {
 
   const handleQuizComplete = (correct: boolean) => {
     setQuizCorrect(correct);
-    setQuizDone(true);
-    if (!isCompleted) {
-      markLetterCompleted(letter.id);
-      addXP(correct ? 20 : 5);
+    // Only mark the letter completed on a CORRECT answer. A wrong answer is
+    // a signal to try again, not a free pass.
+    if (correct) {
+      setQuizDone(true);
+      if (!isCompleted) {
+        markLetterCompleted(letter.id);
+        addXP(20);
+      }
+    } else {
+      // Reset the inline quiz so the user can take another swing
+      addXP(2);
+      setShowMiniQuiz(false);
     }
   };
 
@@ -82,11 +90,13 @@ export default function LetterDetail() {
           </section>
         )}
 
-        {/* Step 1: See the letter in a familiar word */}
+        {/* Step 1: See the letter in familiar words.
+            If a brand anchor exists, this section is a passive "you'll also see it here"
+            panel — no tap CTA — so we don't ask the user to do the same gesture twice. */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-              {letter.brandAnchor ? 'In words you already say' : 'You already say this word'}
+              {letter.brandAnchor ? "And in words you already say" : "You already say this word"}
             </h2>
             <div className="flex items-center gap-1">
               <button
@@ -112,9 +122,10 @@ export default function LetterDetail() {
           <div className="bg-saffron-50 rounded-2xl p-6 border border-saffron-100">
             <LetterInWordDisplay
               anchorWord={currentAnchor}
-              onTapHighlighted={handleTapHighlighted}
+              // Brand anchor is the primary tap target; passive here.
+              onTapHighlighted={letter.brandAnchor ? undefined : handleTapHighlighted}
             />
-            {!showIsolated && (
+            {!showIsolated && !letter.brandAnchor && (
               <p className="text-center text-xs text-saffron-600 mt-4 font-medium">
                 ↑ Tap the highlighted letter to isolate it
               </p>
@@ -172,15 +183,13 @@ export default function LetterDetail() {
           </section>
         )}
 
-        {/* Step 4: After quiz */}
-        {quizDone && (
+        {/* Step 4: After quiz (only reached on correct) */}
+        {quizDone && quizCorrect && (
           <section className="space-y-3 animate-bounce-in">
-            <div className={`p-4 rounded-xl text-center ${quizCorrect ? 'bg-teal-50 border border-teal-200' : 'bg-clay-50 border border-clay-200'}`}>
-              <p className="font-bold text-lg mb-1">{quizCorrect ? '🎉 Great job!' : '💪 Keep going!'}</p>
+            <div className="p-4 rounded-xl text-center bg-teal-50 border border-teal-200">
+              <p className="font-bold text-lg mb-1">🎉 Letter learned!</p>
               <p className="text-sm text-muted-foreground">
-                {quizCorrect
-                  ? `+20 XP earned. Review scheduled for tomorrow.`
-                  : `+5 XP earned. This letter will appear in tomorrow's review.`}
+                +20 XP earned. Review scheduled for tomorrow.
               </p>
             </div>
             {nextLetterId ? (

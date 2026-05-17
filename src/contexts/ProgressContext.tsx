@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import type { UserProgress, LearningStage, QuizScore, LetterReviewRecord } from '@/types/kannada';
-import { letterGroups } from '@/data/letterGroups';
+import { letterGroups, getNextGroupId } from '@/data/letterGroups';
+import { letters } from '@/data/letters';
 
 const STORAGE_KEY = 'kannada-app-progress';
 
@@ -57,14 +58,45 @@ function addDays(dateStr: string, days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+
+// Phonetic groups that are NOT vowels — used for the Stage 2 unlock rule
+const CONSONANT_GROUP_IDS = ['velar', 'palatal', 'retroflex', 'dental', 'labial', 'semivowel-sibilant'];
+
+function isAnyConsonantGroupComplete(completedLetterIds: string[]): boolean {
+  return letterGroups.some(g =>
+    CONSONANT_GROUP_IDS.includes(g.id) &&
+    g.letterIds.every(id => completedLetterIds.includes(id))
+  );
+}
+
+function findGroupOfLetter(letterId: string): string | undefined {
+  return letters.find(l => l.id === letterId)?.groupId;
+}
+
 function reducer(state: UserProgress, action: Action): UserProgress {
   switch (action.type) {
     case 'MARK_LETTER_COMPLETED': {
       if (state.completedLetterIds.includes(action.letterId)) return state;
       const completed = [...state.completedLetterIds, action.letterId];
-      // Auto-unlock next stage
+
+      // Auto-unlock next stage: Words requires >=10 letters AND at least one consonant group fully done
       let stage = state.currentStage;
-      if (stage < 2 && completed.length >= 10) stage = 2;
+      if (stage < 2 && completed.length >= 10 && isAnyConsonantGroupComplete(completed)) {
+        stage = 2;
+      }
+
+      // Auto-unlock the next letter group if the current group is now fully complete
+      let unlockedGroupIds = state.unlockedGroupIds;
+      const currentGroupId = findGroupOfLetter(action.letterId);
+      if (currentGroupId) {
+        const currentGroup = letterGroups.find(g => g.id === currentGroupId);
+        if (currentGroup && currentGroup.letterIds.every(id => completed.includes(id))) {
+          const nextId = getNextGroupId(currentGroupId);
+          if (nextId && !unlockedGroupIds.includes(nextId)) {
+            unlockedGroupIds = [...unlockedGroupIds, nextId];
+          }
+        }
+      }
 
       // Create SRS record if not exists
       const existing = state.letterReviewRecords.find(r => r.letterId === action.letterId);
@@ -77,7 +109,7 @@ function reducer(state: UserProgress, action: Action): UserProgress {
             lastReviewedDate: todayStr(),
           }];
 
-      return { ...state, completedLetterIds: completed, currentStage: stage, letterReviewRecords: records };
+      return { ...state, completedLetterIds: completed, currentStage: stage, unlockedGroupIds, letterReviewRecords: records };
     }
 
     case 'MARK_LETTER_MASTERED': {

@@ -1,14 +1,39 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { QuizCard } from './QuizCard';
-import { generateLetterToRomanizationQuestion, generateRomanizationToLetterQuestion } from '@/data/quizzes';
+import { generateLetterToRomanizationQuestion } from '@/data/quizzes';
 import { useProgress } from '@/contexts/ProgressContext';
-import { letters } from '@/data/letters';
-import { Button } from '@/components/ui/button';
+import { letters, getLetterById } from '@/data/letters';
+import { letterGroups } from '@/data/letterGroups';
 
 interface MiniQuizProps {
   letterId: string;
   onComplete: (correct: boolean) => void;
+}
+
+// Build a distractor pool from the letter's own phonetic group.
+// If the group has fewer than 4 letters (need 1 target + 3 distractors),
+// expand to adjacent groups in stageOrder until we have enough.
+function buildSameGroupPool(letterId: string): string[] {
+  const letter = getLetterById(letterId);
+  if (!letter) return letters.slice(0, 12).map(l => l.id);
+
+  const targetGroup = letterGroups.find(g => g.id === letter.groupId);
+  const targetOrder = targetGroup?.stageOrder ?? 0;
+
+  // Sort groups by phonetic distance (same group first, then adjacent groups)
+  const ordered = letterGroups.slice().sort((a, b) =>
+    Math.abs(a.stageOrder - targetOrder) - Math.abs(b.stageOrder - targetOrder)
+  );
+
+  const pool: string[] = [];
+  for (const g of ordered) {
+    for (const id of g.letterIds) {
+      if (!pool.includes(id)) pool.push(id);
+    }
+    if (pool.length >= 6) break;
+  }
+  return pool;
 }
 
 export function MiniQuiz({ letterId, onComplete }: MiniQuizProps) {
@@ -16,8 +41,10 @@ export function MiniQuiz({ letterId, onComplete }: MiniQuizProps) {
   const [answered, setAnswered] = useState(false);
   const [wasCorrect, setWasCorrect] = useState(false);
 
-  const allIds = letters.slice(0, 12).map(l => l.id);
-  const question = generateLetterToRomanizationQuestion(letterId, allIds);
+  // Distractors come from the same phonetic group as the target letter,
+  // expanding to neighbours only if the group is too small.
+  const pool = buildSameGroupPool(letterId);
+  const question = generateLetterToRomanizationQuestion(letterId, pool);
 
   const handleAnswer = (_qId: string, _optId: string, correct: boolean) => {
     setAnswered(true);
@@ -28,7 +55,7 @@ export function MiniQuiz({ letterId, onComplete }: MiniQuizProps) {
       addXP(10);
       toast.success('Correct! +10 XP', { duration: 1500 });
     } else {
-      toast.error('Not quite — keep going!', { duration: 1500 });
+      toast.error('Not quite — try again', { duration: 1500 });
     }
 
     setTimeout(() => onComplete(correct), 1400);
@@ -39,7 +66,7 @@ export function MiniQuiz({ letterId, onComplete }: MiniQuizProps) {
       <div className={`p-4 rounded-xl text-center font-semibold ${
         wasCorrect ? 'bg-teal-50 text-teal-700' : 'bg-red-50 text-red-700'
       }`}>
-        {wasCorrect ? '✓ Correct!' : '✗ Keep practicing'}
+        {wasCorrect ? '✓ Correct!' : '✗ Try again to mark this letter learned'}
       </div>
     );
   }

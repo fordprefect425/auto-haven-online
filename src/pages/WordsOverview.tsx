@@ -32,7 +32,7 @@ export default function WordsOverview() {
       ) : (
         <div className="px-4 pt-4 pb-6 space-y-4">
           <p className="text-sm text-muted-foreground">
-            Tap a card to reveal the word's romanization and meaning.
+            Read each word and pick its correct romanization.
           </p>
 
           {/* Difficulty filter */}
@@ -59,7 +59,7 @@ export default function WordsOverview() {
                 key={word.id}
                 word={word}
                 isCompleted={progress.completedWordIds.includes(word.id)}
-                onClick={() => {
+                onCorrect={() => {
                   if (!progress.completedWordIds.includes(word.id)) {
                     markWordCompleted(word.id);
                   }

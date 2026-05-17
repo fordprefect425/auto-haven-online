@@ -27,18 +27,28 @@ export function LetterInWordDisplay({ anchorWord, onTapHighlighted }: LetterInWo
       <div className="flex items-center gap-0 font-kannada text-5xl font-bold tracking-wide">
         {graphemes.map((g, i) => {
           const isTarget = i === targetIdx;
-          return isTarget ? (
-            <button
-              key={i}
-              onClick={onTapHighlighted}
-              lang="kn"
-              aria-label={`This is the letter that makes the "${anchorWord.romanization.split('')[0]}" sound`}
-              className="letter-highlight cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-            >
-              {g}
-            </button>
-          ) : (
-            <span key={i} lang="kn" className="text-foreground/70">
+          if (!isTarget) {
+            return <span key={i} lang="kn" className="text-foreground/70">{g}</span>;
+          }
+          // When a handler is provided, render an interactive button.
+          // When it's omitted (e.g. brand anchor is the primary tap target on this page),
+          // render a visually-highlighted but non-interactive span so we don't ask the
+          // user to do the same gesture twice.
+          if (onTapHighlighted) {
+            return (
+              <button
+                key={i}
+                onClick={onTapHighlighted}
+                lang="kn"
+                aria-label={`This is the letter that makes the "${anchorWord.romanization.split('')[0]}" sound`}
+                className="letter-highlight cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+              >
+                {g}
+              </button>
+            );
+          }
+          return (
+            <span key={i} lang="kn" className="letter-highlight rounded">
               {g}
             </span>
           );
